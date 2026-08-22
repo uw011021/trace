@@ -4,9 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>校服 · 主人绑定</title>
-    <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js">
+    </script>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
             background: linear-gradient(135deg, #e8f4f8 0%, #f0f7ff 50%, #e6f0ff 100%);
@@ -16,26 +22,30 @@
             align-items: center;
             justify-content: center;
         }
+
         .container {
             max-width: 500px;
             width: 100%;
             background: #fff;
             border-radius: 28px;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
             overflow: hidden;
             padding: 24px 20px 20px;
         }
+
         .header {
             text-align: center;
             padding-bottom: 18px;
             border-bottom: 1px solid #ecf3f8;
         }
+
         .header .logo {
             font-size: 24px;
             font-weight: 700;
             color: #1a3a5c;
             letter-spacing: 3px;
         }
+
         .header .sub {
             font-size: 13px;
             color: #5a7a8a;
@@ -51,17 +61,20 @@
             margin: 20px 0 18px;
             border: 1px solid #dae8f0;
         }
+
         .qrcard p {
             font-weight: 600;
             color: #1a3a5c;
             font-size: 15px;
             margin-bottom: 8px;
         }
+
         #qrcode {
             display: flex;
             justify-content: center;
             margin: 6px auto 10px;
         }
+
         .code-info {
             background: #e3edf5;
             padding: 6px 16px;
@@ -72,6 +85,7 @@
             word-break: break-all;
             font-weight: 500;
         }
+
         .qr-hint {
             font-size: 12px;
             color: #5a7a8a;
@@ -86,6 +100,7 @@
             border-left: 5px solid #2c5f8a;
             min-height: 80px;
         }
+
         .empty-state {
             color: #7a8f9f;
             font-size: 14px;
@@ -93,18 +108,24 @@
             text-align: center;
             padding: 6px 0;
         }
+
         .owner-detail {
             font-size: 14px;
             padding: 8px 0;
             border-bottom: 1px dashed #d0dfe8;
         }
-        .owner-detail:last-child { border-bottom: none; }
+
+        .owner-detail:last-child {
+            border-bottom: none;
+        }
+
         .owner-label {
             font-weight: 600;
             color: #1a3a5c;
             display: inline-block;
             width: 80px;
         }
+
         .owner-value {
             color: #1f3b4f;
             font-weight: 500;
@@ -113,6 +134,7 @@
         .form-group {
             margin-bottom: 16px;
         }
+
         label {
             display: block;
             font-weight: 600;
@@ -120,6 +142,7 @@
             font-size: 13px;
             margin-bottom: 5px;
         }
+
         input {
             width: 100%;
             padding: 12px 14px;
@@ -129,17 +152,20 @@
             background: #ffffff;
             transition: 0.2s;
         }
+
         input:focus {
             outline: none;
             border-color: #2c5f8a;
-            box-shadow: 0 0 0 3px rgba(44,95,138,0.08);
+            box-shadow: 0 0 0 3px rgba(44, 95, 138, 0.08);
         }
+
         .btn-group {
             display: flex;
             flex-direction: column;
             gap: 10px;
             margin-top: 6px;
         }
+
         .btn {
             border: none;
             padding: 14px;
@@ -151,24 +177,29 @@
             width: 100%;
             letter-spacing: 1px;
         }
+
         .btn-primary {
             background: linear-gradient(135deg, #2c5f8a, #1a3a5c);
             color: #fff;
         }
+
         .btn-primary:hover {
             transform: translateY(-1px);
-            box-shadow: 0 6px 16px rgba(44,95,138,0.25);
+            box-shadow: 0 6px 16px rgba(44, 95, 138, 0.25);
         }
+
         .btn-primary:disabled {
             opacity: 0.6;
             transform: none;
             box-shadow: none;
         }
+
         .btn-reset {
             background: #edf2f7;
             color: #4a5f6f;
             border: 1px solid #d0dfe8;
         }
+
         .btn-reset:hover {
             background: #e2eaf0;
         }
@@ -205,9 +236,16 @@
             vertical-align: middle;
             margin-right: 6px;
         }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
-        /* 新增：固定二维码内容提示 */
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
         .qr-fixed-hint {
             font-size: 11px;
             color: #7a9aaa;
@@ -217,280 +255,344 @@
             border-radius: 12px;
             display: inline-block;
         }
+
+        /* 密码框特殊样式 */
+        .password-group {
+            margin-top: 6px;
+        }
+
+        .password-group input {
+            letter-spacing: 2px;
+        }
+
+        .password-hint {
+            font-size: 11px;
+            color: #7a8f9f;
+            margin-top: 4px;
+            text-align: right;
+        }
     </style>
 </head>
 <body>
-<div class="container">
+    <div class="container">
 
-    <div class="header">
-        <div class="logo"></div>
-        <div class="sub">校服主人绑定 · 云端存储</div>
-    </div>
-
-    <div class="qrcard">
-        <p>📌 校服唯一溯源码</p>
-        <div id="qrcode"></div>
-        <div style="margin: 6px 0 4px;">
-            <span class="code-info" id="uniformIdDisplay">加载中...</span>
+        <div class="header">
+            <div class="logo">🧥 校服·溯源码</div>
+            <div class="sub">主人绑定 · 云端存储</div>
         </div>
-        <div class="qr-hint">👆 扫码分享 · 他人扫码可联系归还</div>
-        <div class="qr-fixed-hint">🔗 二维码包含校服ID，扫码自动匹配数据</div>
+
+        <div class="qrcard">
+            <p>📌 校服唯一溯源码</p>
+            <div id="qrcode"></div>
+            <div style="margin: 6px 0 4px;">
+                <span class="code-info" id="uniformIdDisplay">加载中...</span>
+            </div>
+            <div class="qr-hint">👆 扫码分享 · 他人扫码可联系归还</div>
+            <div class="qr-fixed-hint">🔗 二维码包含校服ID，扫码自动匹配数据</div>
+        </div>
+
+        <div class="owner-card" id="ownerInfoPanel">
+            <div class="empty-state"><span class="loading"></span> 加载云端数据...</div>
+        </div>
+
+        <div class="form-group">
+            <label>👤 学生姓名 *</label>
+            <input type="text" id="ownerName" placeholder="例: 张明轩" autocomplete="off">
+        </div>
+        <div class="form-group">
+            <label>🏫 班级</label>
+            <input type="text" id="ownerClass" placeholder="例: 五年级(3)班" autocomplete="off">
+        </div>
+        <div class="form-group">
+            <label>📞 联系电话 *</label>
+            <input type="tel" id="ownerPhone" placeholder="家长或老师手机号" autocomplete="off">
+        </div>
+
+        <!-- 🔐 密码输入区 (绑定/清除均需密码) -->
+        <div class="form-group password-group">
+            <label>🔑 操作密码 <span style="font-weight:400;color:#7a8f9f;font-size:12px;">(绑定/清除均需)</span></label>
+            <input type="password" id="accessPassword" placeholder="请输入密码 (默认: 123456)" autocomplete="off">
+            <div class="password-hint">默认密码: 123456 (可修改)</div>
+        </div>
+
+        <div class="btn-group">
+            <button id="bindBtn" class="btn btn-primary">🔒 绑定 / 更新校服主人</button>
+            <button id="resetBtn" class="btn btn-reset">🗑️ 清除绑定</button>
+        </div>
+
+        <div class="alert" id="msgArea">
+            <span>ℹ️</span> <span id="msgText"></span>
+        </div>
+
+        <div class="footer">
+            © 2026 · 主人信息云端保存 · 密码保护
+        </div>
     </div>
 
-    <div class="owner-card" id="ownerInfoPanel">
-        <div class="empty-state"><span class="loading"></span> 加载云端数据...</div>
-    </div>
+    <script>
+        // ==================== JSONBin.io 配置 ====================
+        const JSONBIN_API_KEY = '$2a$10$YENsP/yv0VlJEgD1QMEPne6rNuVqWBYq4AS16zBkuF7zZCkka21W2';
+        const BIN_ID = '6a29156ada38895dfea51924';
 
-    <div class="form-group">
-        <label>👤 学生姓名 *</label>
-        <input type="text" id="ownerName" placeholder="例: 张明轩" autocomplete="off">
-    </div>
-    <div class="form-group">
-        <label>🏫 班级</label>
-        <input type="text" id="ownerClass" placeholder="例: 五年级(3)班" autocomplete="off">
-    </div>
-    <div class="form-group">
-        <label>📞 联系电话 *</label>
-        <input type="tel" id="ownerPhone" placeholder="家长或老师手机号" autocomplete="off">
-    </div>
+        // ---------- 固定基础链接 (二维码内容以此为前缀 + uniform参数) ----------
+        const BASE_URL = 'https://uw011021.github.io/trace/A5066BFE-8ADA-3181-C058-3ADA8F1157AE.html';
 
-    <div class="btn-group">
-        <button id="bindBtn" class="btn btn-primary">🔒 绑定 / 更新校服主人</button>
-        <button id="resetBtn" class="btn btn-reset">🗑️ 清除绑定</button>
-    </div>
-
-    <div class="alert" id="msgArea">
-        <span>ℹ️</span> <span id="msgText"></span>
-    </div>
-
-    <div class="footer">
-        © 2026 · 主人信息云端保存
-    </div>
-</div>
-
-<script>
-    // ==================== JSONBin.io 配置 ====================
-    const JSONBIN_API_KEY = '$2a$10$YENsP/yv0VlJEgD1QMEPne6rNuVqWBYq4AS16zBkuF7zZCkka21W2';
-    const BIN_ID = '6a29156ada38895dfea51924';
-
-    // ---------- 固定基础链接 (二维码内容以此为前缀 + uniform参数) ----------
-    const BASE_URL = 'https://uw011021.github.io/trace/A5066BFE-8ADA-3181-C058-3ADA8F1157AE.html';
-
-    // ---------- 校服ID (用于数据存储键 + 二维码参数) ----------
-    function getUniformId() {
-        let urlParams = new URLSearchParams(window.location.search);
-        let id = urlParams.get('uniform');
-        if (id && id.trim() !== "") return id.trim();
-        // 首次访问无ID时生成新ID
-        const newId = 'UNI' + Date.now() + '-' + Math.random().toString(36).substr(2, 8);
-        // 将ID写入URL，方便分享
-        let base = window.location.href.split('?')[0];
-        let newUrl = base + '?uniform=' + encodeURIComponent(newId);
-        window.history.replaceState({}, '', newUrl);
-        return newId;
-    }
-    let currentUniformId = getUniformId();
-
-    // ---------- UI 辅助 ----------
-    function showMessage(text, isError = false) {
-        const msgDiv = document.getElementById('msgArea');
-        const msgSpan = document.getElementById('msgText');
-        msgSpan.innerText = text;
-        msgDiv.style.display = 'flex';
-        msgDiv.style.background = isError ? '#fee8e8' : '#e0f2e9';
-        msgDiv.style.color = isError ? '#b33' : '#166534';
-        clearTimeout(msgDiv._timer);
-        msgDiv._timer = setTimeout(() => { msgDiv.style.display = 'none'; }, 3500);
-    }
-
-    function setLoading(loading) {
-        const bindBtn = document.getElementById('bindBtn');
-        if (loading) {
-            bindBtn.innerHTML = '<span class="loading"></span> 处理中...';
-            bindBtn.disabled = true;
-        } else {
-            bindBtn.innerHTML = '🔒 绑定 / 更新校服主人';
-            bindBtn.disabled = false;
+        // ---------- 校服ID ----------
+        function getUniformId() {
+            let urlParams = new URLSearchParams(window.location.search);
+            let id = urlParams.get('uniform');
+            if (id && id.trim() !== "") return id.trim();
+            const newId = 'UNI' + Date.now() + '-' + Math.random().toString(36).substr(2, 8);
+            let base = window.location.href.split('?')[0];
+            let newUrl = base + '?uniform=' + encodeURIComponent(newId);
+            window.history.replaceState({}, '', newUrl);
+            return newId;
         }
-    }
+        let currentUniformId = getUniformId();
 
-    // ---------- 云端读写 ----------
-    async function fetchAllData() {
-        try {
-            const response = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`, {
-                headers: { 'X-Master-Key': JSONBIN_API_KEY }
-            });
-            if (!response.ok) throw new Error('读取失败');
-            const data = await response.json();
-            return data.record || {};
-        } catch (error) {
-            console.error('读取失败:', error);
+        // ---------- UI 辅助 ----------
+        function showMessage(text, isError = false) {
+            const msgDiv = document.getElementById('msgArea');
+            const msgSpan = document.getElementById('msgText');
+            msgSpan.innerText = text;
+            msgDiv.style.display = 'flex';
+            msgDiv.style.background = isError ? '#fee8e8' : '#e0f2e9';
+            msgDiv.style.color = isError ? '#b33' : '#166534';
+            clearTimeout(msgDiv._timer);
+            msgDiv._timer = setTimeout(() => { msgDiv.style.display = 'none'; }, 4000);
+        }
+
+        function setLoading(loading) {
+            const bindBtn = document.getElementById('bindBtn');
+            if (loading) {
+                bindBtn.innerHTML = '<span class="loading"></span> 处理中...';
+                bindBtn.disabled = true;
+            } else {
+                bindBtn.innerHTML = '🔒 绑定 / 更新校服主人';
+                bindBtn.disabled = false;
+            }
+        }
+
+        // ---------- 密码验证 (硬编码默认密码，可自行修改) ----------
+        const CORRECT_PASSWORD = '123456'; // 默认密码，可在此修改
+
+        function verifyPassword(inputPwd) {
+            return inputPwd === CORRECT_PASSWORD;
+        }
+
+        // ---------- 云端读写 ----------
+        async function fetchAllData() {
+            try {
+                const response = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`, {
+                    headers: { 'X-Master-Key': JSONBIN_API_KEY }
+                });
+                if (!response.ok) throw new Error('读取失败');
+                const data = await response.json();
+                return data.record || {};
+            } catch (error) {
+                console.error('读取失败:', error);
+                return null;
+            }
+        }
+
+        async function saveAllData(data) {
+            try {
+                const response = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-Master-Key': JSONBIN_API_KEY
+                    },
+                    body: JSON.stringify(data)
+                });
+                return response.ok;
+            } catch (error) {
+                console.error('保存失败:', error);
+                return false;
+            }
+        }
+
+        async function getUniformOwner() {
+            const allData = await fetchAllData();
+            if (allData && allData[currentUniformId]) return allData[currentUniformId];
             return null;
         }
-    }
 
-    async function saveAllData(data) {
-        try {
-            const response = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-Master-Key': JSONBIN_API_KEY
-                },
-                body: JSON.stringify(data)
-            });
-            return response.ok;
-        } catch (error) {
-            console.error('保存失败:', error);
-            return false;
-        }
-    }
-
-    async function getUniformOwner() {
-        const allData = await fetchAllData();
-        if (allData && allData[currentUniformId]) return allData[currentUniformId];
-        return null;
-    }
-
-    async function saveUniformOwner(name, className, phone) {
-        setLoading(true);
-        try {
-            let allData = await fetchAllData();
-            if (!allData) allData = {};
-            allData[currentUniformId] = {
-                name: name,
-                className: className,
-                phone: phone,
-                lastUpdated: new Date().toISOString(),
-                uniformId: currentUniformId
-            };
-            const success = await saveAllData(allData);
-            if (success) {
-                showMessage(`✅ 绑定成功！校服主人：${name}`);
-                await refreshDisplay();
-            } else {
-                showMessage('❌ 保存失败，请重试', true);
+        // ---------- 核心操作 (均需密码验证) ----------
+        async function saveUniformOwner(name, className, phone, password) {
+            if (!verifyPassword(password)) {
+                showMessage('❌ 密码错误，请重试', true);
+                return false;
             }
-        } catch (error) {
-            showMessage('保存出错，请检查网络', true);
-        } finally {
-            setLoading(false);
-        }
-    }
 
-    async function clearUniformOwner() {
-        if (!confirm('⚠️ 确认清除当前校服的所有绑定信息吗？')) return;
-        setLoading(true);
-        try {
-            let allData = await fetchAllData();
-            if (allData && allData[currentUniformId]) {
-                delete allData[currentUniformId];
-                await saveAllData(allData);
-                showMessage('已清除绑定');
-                await refreshDisplay();
-            } else {
-                showMessage('当前校服无绑定数据');
+            setLoading(true);
+            try {
+                let allData = await fetchAllData();
+                if (!allData) allData = {};
+                allData[currentUniformId] = {
+                    name: name,
+                    className: className,
+                    phone: phone,
+                    lastUpdated: new Date().toISOString(),
+                    uniformId: currentUniformId
+                };
+                const success = await saveAllData(allData);
+                if (success) {
+                    showMessage(`✅ 绑定成功！校服主人：${name}`);
+                    await refreshDisplay();
+                    return true;
+                } else {
+                    showMessage('❌ 保存失败，请重试', true);
+                    return false;
+                }
+            } catch (error) {
+                showMessage('保存出错，请检查网络', true);
+                return false;
+            } finally {
+                setLoading(false);
             }
-        } catch (error) {
-            showMessage('清除失败，请重试', true);
-        } finally {
-            setLoading(false);
         }
-    }
 
-    function escapeHtml(str) {
-        if (!str) return '';
-        return str.replace(/[&<>]/g, function(m) {
-            if (m === '&') return '&amp;';
-            if (m === '<') return '&lt;';
-            if (m === '>') return '&gt;';
-            return m;
-        });
-    }
+        async function clearUniformOwner(password) {
+            if (!verifyPassword(password)) {
+                showMessage('❌ 密码错误，清除失败', true);
+                return false;
+            }
 
-    // ---------- 刷新显示 ----------
-    async function refreshDisplay() {
-        const panel = document.getElementById('ownerInfoPanel');
-        const nameInput = document.getElementById('ownerName');
-        const classInput = document.getElementById('ownerClass');
-        const phoneInput = document.getElementById('ownerPhone');
+            if (!confirm('⚠️ 确认清除当前校服的所有绑定信息吗？')) return false;
 
-        panel.innerHTML = '<div class="empty-state"><span class="loading"></span> 加载云端数据...</div>';
-        const info = await getUniformOwner();
-
-        if (info && info.name && info.name !== "") {
-            panel.innerHTML = `
-                <div style="font-weight:600; color:#1a3a5c; margin-bottom:6px;">🏷️ 当前主人</div>
-                <div class="owner-detail"><span class="owner-label">👧 姓名</span><span class="owner-value">${escapeHtml(info.name)}</span></div>
-                <div class="owner-detail"><span class="owner-label">📚 班级</span><span class="owner-value">${escapeHtml(info.className || '未填')}</span></div>
-                <div class="owner-detail"><span class="owner-label">📱 联系方式</span><span class="owner-value">${escapeHtml(info.phone || '未填')}</span></div>
-                <div class="owner-detail" style="font-size:12px; color:#6a8a9a;"><span class="owner-label">🕒 更新</span><span class="owner-value">${new Date(info.lastUpdated).toLocaleString()}</span></div>
-            `;
-            nameInput.value = info.name;
-            classInput.value = info.className || '';
-            phoneInput.value = info.phone || '';
-        } else {
-            panel.innerHTML = `<div class="empty-state">⚠️ 当前校服尚未绑定主人。<br>填写下方表单并点击「绑定」，他人扫码可联系归还。</div>`;
-            nameInput.value = '';
-            classInput.value = '';
-            phoneInput.value = '';
+            setLoading(true);
+            try {
+                let allData = await fetchAllData();
+                if (allData && allData[currentUniformId]) {
+                    delete allData[currentUniformId];
+                    await saveAllData(allData);
+                    showMessage('✅ 已清除绑定');
+                    await refreshDisplay();
+                    return true;
+                } else {
+                    showMessage('当前校服无绑定数据');
+                    return false;
+                }
+            } catch (error) {
+                showMessage('清除失败，请重试', true);
+                return false;
+            } finally {
+                setLoading(false);
+            }
         }
-    }
 
-    // ---------- 绑定事件 ----------
-    async function bindUniform() {
-        const name = document.getElementById('ownerName').value.trim();
-        const className = document.getElementById('ownerClass').value.trim();
-        const phone = document.getElementById('ownerPhone').value.trim();
-        if (!name) { showMessage('请填写学生姓名', true); return; }
-        if (!phone) { showMessage('请填写联系电话', true); return; }
-        if (phone.length < 6) { showMessage('请填写有效号码', true); return; }
-        await saveUniformOwner(name, className, phone);
-    }
-
-    // ---------- 二维码 (包含 uniform 参数，确保扫码后数据一致) ----------
-    let qr = null;
-    function generateQRCode() {
-        // 构建完整二维码内容：基础链接 + ?uniform=当前校服ID
-        const qrContent = BASE_URL + '?uniform=' + encodeURIComponent(currentUniformId);
-
-        const displaySpan = document.getElementById('uniformIdDisplay');
-        displaySpan.innerHTML = `校服码: ${currentUniformId.substring(0, 14)}...`;
-
-        const container = document.getElementById('qrcode');
-        container.innerHTML = "";
-        try {
-            qr = new QRCode(container, {
-                text: qrContent,
-                width: 160,
-                height: 160,
-                colorDark: "#1a3a5c",
-                colorLight: "#ffffff",
-                correctLevel: QRCode.CorrectLevel.M
+        function escapeHtml(str) {
+            if (!str) return '';
+            return str.replace(/[&<>]/g, function(m) {
+                if (m === '&') return '&amp;';
+                if (m === '<') return '&lt;';
+                if (m === '>') return '&gt;';
+                return m;
             });
-        } catch(e) {
-            container.innerHTML = `<div style="padding:12px; font-size:13px;">二维码生成失败，<a href="${qrContent}" target="_blank">点击链接</a></div>`;
         }
-    }
 
-    // ---------- 初始化 ----------
-    async function init() {
-        // 确保URL有uniform参数 (用于数据键)
-        let hasId = new URLSearchParams(window.location.search).get('uniform');
-        if (!hasId) {
-            let base = window.location.href.split('?')[0];
-            let newUrl = base + '?uniform=' + encodeURIComponent(currentUniformId);
-            window.history.replaceState({}, '', newUrl);
+        // ---------- 刷新显示 ----------
+        async function refreshDisplay() {
+            const panel = document.getElementById('ownerInfoPanel');
+            const nameInput = document.getElementById('ownerName');
+            const classInput = document.getElementById('ownerClass');
+            const phoneInput = document.getElementById('ownerPhone');
+
+            panel.innerHTML = '<div class="empty-state"><span class="loading"></span> 加载云端数据...</div>';
+            const info = await getUniformOwner();
+
+            if (info && info.name && info.name !== "") {
+                panel.innerHTML = `
+                        <div style="font-weight:600; color:#1a3a5c; margin-bottom:6px;">🏷️ 当前主人</div>
+                        <div class="owner-detail"><span class="owner-label">👧 姓名</span><span class="owner-value">${escapeHtml(info.name)}</span></div>
+                        <div class="owner-detail"><span class="owner-label">📚 班级</span><span class="owner-value">${escapeHtml(info.className || '未填')}</span></div>
+                        <div class="owner-detail"><span class="owner-label">📱 联系方式</span><span class="owner-value">${escapeHtml(info.phone || '未填')}</span></div>
+                        <div class="owner-detail" style="font-size:12px; color:#6a8a9a;"><span class="owner-label">🕒 更新</span><span class="owner-value">${new Date(info.lastUpdated).toLocaleString()}</span></div>
+                    `;
+                nameInput.value = info.name;
+                classInput.value = info.className || '';
+                phoneInput.value = info.phone || '';
+            } else {
+                panel.innerHTML = `<div class="empty-state">⚠️ 当前校服尚未绑定主人。<br>填写下方表单并点击「绑定」，他人扫码可联系归还。</div>`;
+                nameInput.value = '';
+                classInput.value = '';
+                phoneInput.value = '';
+            }
         }
-        generateQRCode();
-        await refreshDisplay();
 
-        document.getElementById('bindBtn').addEventListener('click', bindUniform);
-        document.getElementById('resetBtn').addEventListener('click', clearUniformOwner);
-    }
+        // ---------- 绑定事件 (带密码) ----------
+        async function bindUniform() {
+            const name = document.getElementById('ownerName').value.trim();
+            const className = document.getElementById('ownerClass').value.trim();
+            const phone = document.getElementById('ownerPhone').value.trim();
+            const password = document.getElementById('accessPassword').value;
 
-    init();
-</script>
+            if (!name) { showMessage('请填写学生姓名', true); return; }
+            if (!phone) { showMessage('请填写联系电话', true); return; }
+            if (phone.length < 6) { showMessage('请填写有效号码', true); return; }
+            if (!password) { showMessage('请输入操作密码', true); return; }
 
+            await saveUniformOwner(name, className, phone, password);
+        }
+
+        // ---------- 清除事件 (带密码) ----------
+        async function clearUniform() {
+            const password = document.getElementById('accessPassword').value;
+            if (!password) {
+                showMessage('请输入操作密码', true);
+                return;
+            }
+            await clearUniformOwner(password);
+        }
+
+        // ---------- 二维码 ----------
+        let qr = null;
+
+        function generateQRCode() {
+            const qrContent = BASE_URL + '?uniform=' + encodeURIComponent(currentUniformId);
+            const displaySpan = document.getElementById('uniformIdDisplay');
+            displaySpan.innerHTML = `校服码: ${currentUniformId.substring(0, 14)}...`;
+
+            const container = document.getElementById('qrcode');
+            container.innerHTML = "";
+            try {
+                qr = new QRCode(container, {
+                    text: qrContent,
+                    width: 160,
+                    height: 160,
+                    colorDark: "#1a3a5c",
+                    colorLight: "#ffffff",
+                    correctLevel: QRCode.CorrectLevel.M
+                });
+            } catch (e) {
+                container.innerHTML = `<div style="padding:12px; font-size:13px;">二维码生成失败，<a href="${qrContent}" target="_blank">点击链接</a></div>`;
+            }
+        }
+
+        // ---------- 初始化 ----------
+        async function init() {
+            let hasId = new URLSearchParams(window.location.search).get('uniform');
+            if (!hasId) {
+                let base = window.location.href.split('?')[0];
+                let newUrl = base + '?uniform=' + encodeURIComponent(currentUniformId);
+                window.history.replaceState({}, '', newUrl);
+            }
+            generateQRCode();
+            await refreshDisplay();
+
+            document.getElementById('bindBtn').addEventListener('click', bindUniform);
+            document.getElementById('resetBtn').addEventListener('click', clearUniform);
+
+            // 按回车快速触发绑定
+            document.getElementById('accessPassword').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    bindUniform();
+                }
+            });
+        }
+
+        init();
+    </script>
 </body>
 </html>
