@@ -256,7 +256,6 @@
             display: inline-block;
         }
 
-        /* 密码框特殊样式 */
         .password-group {
             margin-top: 6px;
         }
@@ -308,7 +307,6 @@
             <input type="tel" id="ownerPhone" placeholder="家长或老师手机号" autocomplete="off">
         </div>
 
-        <!-- 🔐 密码输入区 (绑定/清除均需密码) -->
         <div class="form-group password-group">
             <label>🔑 操作密码 <span style="font-weight:400;color:#7a8f9f;font-size:12px;">(绑定/清除均需)</span></label>
             <input type="password" id="accessPassword" placeholder="请输入密码 (默认: 123456)" autocomplete="off">
@@ -373,8 +371,8 @@
             }
         }
 
-        // ---------- 密码验证 (硬编码默认密码，可自行修改) ----------
-        const CORRECT_PASSWORD = '123456'; // 默认密码，可在此修改
+        // ---------- 密码验证 ----------
+        const CORRECT_PASSWORD = '123456';
 
         function verifyPassword(inputPwd) {
             return inputPwd === CORRECT_PASSWORD;
@@ -418,7 +416,7 @@
             return null;
         }
 
-        // ---------- 核心操作 (均需密码验证) ----------
+        // ---------- 核心操作 ----------
         async function saveUniformOwner(name, className, phone, password) {
             if (!verifyPassword(password)) {
                 showMessage('❌ 密码错误，请重试', true);
@@ -521,7 +519,7 @@
             }
         }
 
-        // ---------- 绑定事件 (带密码) ----------
+        // ---------- 绑定事件 ----------
         async function bindUniform() {
             const name = document.getElementById('ownerName').value.trim();
             const className = document.getElementById('ownerClass').value.trim();
@@ -536,7 +534,7 @@
             await saveUniformOwner(name, className, phone, password);
         }
 
-        // ---------- 清除事件 (带密码) ----------
+        // ---------- 清除事件 ----------
         async function clearUniform() {
             const password = document.getElementById('accessPassword').value;
             if (!password) {
@@ -546,11 +544,13 @@
             await clearUniformOwner(password);
         }
 
-        // ---------- 二维码 ----------
+        // ========== 二维码生成 (保持与原始版本完全一致) ==========
         let qr = null;
 
         function generateQRCode() {
+            // 二维码内容: 只包含基础URL + uniform参数 (与原始逻辑一致)
             const qrContent = BASE_URL + '?uniform=' + encodeURIComponent(currentUniformId);
+
             const displaySpan = document.getElementById('uniformIdDisplay');
             displaySpan.innerHTML = `校服码: ${currentUniformId.substring(0, 14)}...`;
 
@@ -584,7 +584,6 @@
             document.getElementById('bindBtn').addEventListener('click', bindUniform);
             document.getElementById('resetBtn').addEventListener('click', clearUniform);
 
-            // 按回车快速触发绑定
             document.getElementById('accessPassword').addEventListener('keypress', function(e) {
                 if (e.key === 'Enter') {
                     bindUniform();
